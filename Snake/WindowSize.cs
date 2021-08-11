@@ -16,13 +16,13 @@ namespace Snake
             {
                 while (true)
                 {
-                    if (Console.WindowHeight > WindowHeight || Console.WindowWidth > WindowWidth)
+                    if (Console.WindowHeight > WindowHeight || Console.WindowWidth > WindowWidth || Console.WindowHeight < WindowHeight || Console.WindowWidth < WindowWidth)
                     {
                         Console.SetWindowSize(WindowWidth, WindowHeight);
                         Console.SetBufferSize(WindowWidth + 1, WindowHeight + 1);
                     }
                 }
             });
-        }
+        }       
     }
 }

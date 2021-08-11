@@ -12,13 +12,8 @@ namespace Snake
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            string mess0 = "SNAKE";
-            Point p0 = (WindowSize.WindowWidth / 2 - mess0.Length / 2, 0, mess0);
-            p0.Draw();
-            string mess1 = "Оберіть рівень складності від 1 до 3: ";
-            Point p1 = (WindowSize.WindowWidth / 2 - mess1.Length / 2, 1, mess1);
-            p1.Draw();
-
+            PrintMessage("SNAKE", 0);
+            PrintMessage("Оберіть рівень складності від 1 до 3: ",  1);
             while (true)
             {
                 if (!int.TryParse(Console.ReadLine(), out Program.difficultyLevel) || Program.difficultyLevel < 1 || Program.difficultyLevel > 3)
@@ -26,24 +21,19 @@ namespace Snake
                 else
                     break;
             }
+            PrintMessage("Для початку гри натисніть клавішу \"P\"", 2);
+            PrintMessage("Для паузи натисніть клавішу \"Space\"", 3);
+            PrintMessage("Для збереження результатів натисніть клавішу \"S\"",  4);
+            PrintMessage("Для завантаження результатів натисніть клавішу \"U\"", 5);
 
-            string mess2 = "Для початку гри нажміть клавішу \"P\"";
-            Point p2 = (WindowSize.WindowWidth / 2 - mess2.Length / 2, 2, mess2);
-            p2.Draw();
+            Console.CursorVisible = false;
 
-            string mess3 = "Для паузи нажміть клавішу \"Space\"";
-            Point p3 = (WindowSize.WindowWidth / 2 - mess3.Length / 2, 3, mess3);
-            p3.Draw();
-
-            string mess4 = "Для збереження результатів нажміть клавішу \"S\"";
-            Point p4 = (WindowSize.WindowWidth / 2 - mess4.Length / 2, 4, mess4);
-            p4.Draw();
         }
 
-        //static void PrintMessage(string message)
-        //{
-        //    Point p = (WindowSize.WindowWidth / 2 - message.Length / 2, 0, message);
-        //    p.Draw();
-        //}
+        public static void PrintMessage(string message,int y)
+        {
+            Console.SetCursorPosition(WindowSize.WindowWidth / 2 - message.Length / 2, y);
+            Console.Write(message);
+        }
     }
 }

@@ -16,7 +16,6 @@ namespace Snake
         static Timer time;
         public static int difficultyLevel = 1;
         static bool chekPlay = false;
-        static string gameState;
 
         static void Main()
         { 
@@ -30,29 +29,39 @@ namespace Snake
 
             HeaderText.Value();
 
-            Console.CursorVisible = false;
-
             time = new Timer(Loop, null, 0, 200 / difficultyLevel);
-          
+
             while (true)
             {
                 if (Console.KeyAvailable)
                 {
-                    ConsoleKeyInfo key = Console.ReadKey();
-                    snake.Rotation(key.Key);
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.UpArrow)
+                        snake.Rotation("U");
+                    if (key.Key == ConsoleKey.DownArrow)
+                        snake.Rotation("D");
+                    if (key.Key == ConsoleKey.LeftArrow)
+                        snake.Rotation("L");
+                    if (key.Key == ConsoleKey.RightArrow)
+                        snake.Rotation("R");
+                    if (key.Key == ConsoleKey.P)
+                        chekPlay = true;
+                    if (key.Key == ConsoleKey.Spacebar)
+                        chekPlay = false;
+                    if (key.Key == ConsoleKey.S)
+                    {
+                        chekPlay = false;
+                        ExportData expD = new ExportData();
+                        expD.Export();
+                    }
+
                 }
             }
         }
 
         static void Loop(object obj)
         {
-            ConsoleKeyInfo key = Console.ReadKey();
-            if (key.Key == ConsoleKey.P)
-                chekPlay = true;
-            if (key.Key == ConsoleKey.S || key.Key == ConsoleKey.Spacebar)
-                chekPlay = false;
-
-            if(chekPlay == true)
+            if (chekPlay == true)
             {
                 if (walls.IsHit(snake.GetHead()) || snake.IsHit(snake.GetHead()))
                 {

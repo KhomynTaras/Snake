@@ -15,7 +15,7 @@ namespace Snake
     }
     class Snake
     {
-        private List<Point> snake;
+        public static List<Point> snake { get; private set; }
         private Direction direction;
         private int step = 1;
         private Point tail;
@@ -63,7 +63,7 @@ namespace Snake
             }
             return p;
         }
-        public void Rotation(ConsoleKey key)
+        public void Rotation(string m)
         {
             if (rotate)
             {
@@ -71,16 +71,16 @@ namespace Snake
                 {
                     case Direction.LEFT:
                     case Direction.RIGHT:
-                        if (key == ConsoleKey.DownArrow)
+                        if (m == "D")
                             direction = Direction.DOWN;
-                        else if (key == ConsoleKey.UpArrow)
+                        else if (m == "U")
                             direction = Direction.UP;
                         break;
                     case Direction.UP:
                     case Direction.DOWN:
-                        if (key == ConsoleKey.LeftArrow)
+                        if (m == "L")
                             direction = Direction.LEFT;
-                        else if (key == ConsoleKey.RightArrow)
+                        else if (m == "R")
                             direction = Direction.RIGHT;
                         break;
                 }

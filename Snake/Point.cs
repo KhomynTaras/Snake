@@ -31,6 +31,7 @@ namespace Snake
         }
         private void DrawPoint(string _ch)
         {
+
             Console.SetCursorPosition(x, y);
             Console.Write(_ch);
         }
