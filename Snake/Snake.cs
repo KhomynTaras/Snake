@@ -27,7 +27,7 @@ namespace Snake
             snake = new List<Point>();
             for (int i = x - length; i < x; i++)
             {
-                Point p = (i, y, '*');
+                Point p = (i, y, "*");
                 snake.Add(p);
                 p.Draw();
             }

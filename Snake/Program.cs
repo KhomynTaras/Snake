@@ -14,19 +14,26 @@ namespace Snake
         static Walls walls;
         static FoodGeneration foodGeneration;
         static Timer time;
+        public static int difficultyLevel = 1;
+        static bool chekPlay = false;
+        static string gameState;
 
         static void Main()
-        {
+        { 
             WindowSize.Value();
 
-            walls = new Walls(WindowSize.WindowWidth, WindowSize.WindowHeight, '#');
-            snake = new Snake(WindowSize.WindowWidth / 2, WindowSize.WindowHeight / 2, 4);
+            walls = new Walls(WindowSize.WindowWidth, WindowSize.WindowHeight - 1, "#");
+            snake = new Snake(WindowSize.WindowWidth / 2, WindowSize.WindowHeight / 2 + Walls.initialY, 4);
 
-            foodGeneration = new FoodGeneration(WindowSize.WindowWidth, WindowSize.WindowHeight, '@');
+            foodGeneration = new FoodGeneration(WindowSize.WindowWidth, WindowSize.WindowHeight, "@");
             foodGeneration.CreateFood();
 
-            time = new Timer(Loop, null, 0, 200);
+            HeaderText.Value();
 
+            Console.CursorVisible = false;
+
+            time = new Timer(Loop, null, 0, 200 / difficultyLevel);
+          
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -35,24 +42,32 @@ namespace Snake
                     snake.Rotation(key.Key);
                 }
             }
-
-            Console.ReadLine();
         }
 
         static void Loop(object obj)
         {
-            if (walls.IsHit(snake.GetHead()) || snake.IsHit(snake.GetHead()))
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.P)
+                chekPlay = true;
+            if (key.Key == ConsoleKey.S || key.Key == ConsoleKey.Spacebar)
+                chekPlay = false;
+
+            if(chekPlay == true)
             {
-                time.Change(0, Timeout.Infinite);
+                if (walls.IsHit(snake.GetHead()) || snake.IsHit(snake.GetHead()))
+                {
+                    time.Change(0, Timeout.Infinite);
+                }
+                else if (snake.Eat(foodGeneration.food))
+                {
+                    foodGeneration.CreateFood();
+                }
+                else
+                {
+                    snake.Move();
+                }
             }
-            else if (snake.Eat(foodGeneration.food))
-            {
-                foodGeneration.CreateFood();
-            }
-            else
-            {
-                snake.Move();
-            }
+
         }
     }  
 }

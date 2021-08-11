@@ -10,9 +10,9 @@ namespace Snake
     {
         public int x { get; set; }
         public int y { get; set; }
-        public char ch { get; set; }
+        public string ch { get; set; }
 
-        public static implicit operator Point((int, int, char) value)
+        public static implicit operator Point((int, int, string) value)
         {
             return new Point { x = value.Item1, y = value.Item2, ch = value.Item3 };
         }
@@ -27,9 +27,9 @@ namespace Snake
         }
         public void Clear()
         {
-            DrawPoint(' ');
+            DrawPoint(" ");
         }
-        private void DrawPoint(char _ch)
+        private void DrawPoint(string _ch)
         {
             Console.SetCursorPosition(x, y);
             Console.Write(_ch);

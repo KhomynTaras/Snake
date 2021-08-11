@@ -18,7 +18,6 @@ namespace Snake
                 {
                     if (Console.WindowHeight > WindowHeight || Console.WindowWidth > WindowWidth)
                     {
-                        Console.CursorVisible = false;
                         Console.SetWindowSize(WindowWidth, WindowHeight);
                         Console.SetBufferSize(WindowWidth + 1, WindowHeight + 1);
                     }
