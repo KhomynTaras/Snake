@@ -8,7 +8,7 @@ namespace Snake
 {
     class Walls
     {
-        public static readonly int initialY = 8;
+        public static readonly int initialY = 9;
         private string ch;
         private List<Point> wall = new List<Point>();
 

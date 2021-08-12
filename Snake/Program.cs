@@ -10,53 +10,63 @@ namespace Snake
 {
     class Program
     {
-        static Snake snake;
+        public static Snake snake;
         static Walls walls;
         static FoodGeneration foodGeneration;
         static Timer time;
-        public static int difficultyLevel = 1;
-        static bool chekPlay = false;
+
+        static readonly int initialLenght = 4;
+        public static double difficultyLevel = 1;
+        public static bool chekPlay = false;
+        //static bool gameOver = false;
 
         static void Main()
-        { 
+        {
+            ExportData exportData = new ExportData();
+            ImportData.GetMaxPoints();
+
             WindowSize.Value();
 
             walls = new Walls(WindowSize.WindowWidth, WindowSize.WindowHeight - 1, "#");
-            snake = new Snake(WindowSize.WindowWidth / 2, WindowSize.WindowHeight / 2 + Walls.initialY, 4);
+            HeaderText.Value();
+
+            while (true)
+            {
+                if (Console.ReadKey(true).Key == ConsoleKey.P)
+                {
+                    chekPlay = true;
+                    HeaderText.ClearPrintMessage(7);
+                    snake = new Snake(WindowSize.WindowWidth / 2, (WindowSize.WindowHeight + Walls.initialY) / 2, initialLenght);
+                    break;
+                }
+                if (Console.ReadKey(true).Key == ConsoleKey.I)
+                {
+                    var mass = ImportData.Data();
+                    if (mass != null)
+                    {
+                        snake = new Snake(mass);
+                        HeaderText.PrintLastMessage("Файл завнатажено!");
+                    }
+                    else
+                    {
+                        snake = new Snake(WindowSize.WindowWidth / 2, (WindowSize.WindowHeight + Walls.initialY) / 2, initialLenght);
+                        HeaderText.PrintLastMessage("Відсутні збережені дані! Завантажено автоматичні налаштування");
+                    }
+                    break;
+                }
+            }
 
             foodGeneration = new FoodGeneration(WindowSize.WindowWidth, WindowSize.WindowHeight, "@");
             foodGeneration.CreateFood();
 
-            HeaderText.Value();
+            time = new Timer(Loop, null, 0, (int)(200 / difficultyLevel));
 
-            time = new Timer(Loop, null, 0, 200 / difficultyLevel);
-
+            ConnectionWithPlayer connectionWithPlayer = new ConnectionWithPlayer(snake);
             while (true)
             {
-                if (Console.KeyAvailable)
-                {
-                    var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.UpArrow)
-                        snake.Rotation("U");
-                    if (key.Key == ConsoleKey.DownArrow)
-                        snake.Rotation("D");
-                    if (key.Key == ConsoleKey.LeftArrow)
-                        snake.Rotation("L");
-                    if (key.Key == ConsoleKey.RightArrow)
-                        snake.Rotation("R");
-                    if (key.Key == ConsoleKey.P)
-                        chekPlay = true;
-                    if (key.Key == ConsoleKey.Spacebar)
-                        chekPlay = false;
-                    if (key.Key == ConsoleKey.S)
-                    {
-                        chekPlay = false;
-                        ExportData expD = new ExportData();
-                        expD.Export();
-                    }
-
-                }
+                connectionWithPlayer.Connect();
             }
+            //Console.ReadKey();
         }
 
         static void Loop(object obj)
@@ -65,6 +75,9 @@ namespace Snake
             {
                 if (walls.IsHit(snake.GetHead()) || snake.IsHit(snake.GetHead()))
                 {
+                    //gameOver = true;
+                    chekPlay = false;
+                    HeaderText.PrintLastMessage("Game over!");
                     time.Change(0, Timeout.Infinite);
                 }
                 else if (snake.Eat(foodGeneration.food))

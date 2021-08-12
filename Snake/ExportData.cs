@@ -9,29 +9,35 @@ namespace Snake
 {
     class ExportData
     {
-        public static readonly string pathFolder = $@"{Directory.GetCurrentDirectory()}\SavedData";
-        public static readonly string pathTxtFile = $@"{pathFolder}\SavedData.txt";
-
-        public void Export()
+        public ExportData()
         {
             DirectoryInfo dirInfo = new DirectoryInfo(pathFolder);
             if (!dirInfo.Exists)
                 dirInfo.Create();
+        }
 
-            StreamWriter print = new StreamWriter(pathTxtFile, false);
+        public static readonly string pathFolder = $@"{Directory.GetCurrentDirectory()}\SavedData";
+        public static readonly string pathTxtFileSavedData = $@"{pathFolder}\SavedData.txt";
+        public static readonly string pathTxtFileMaxPointsCount = $@"{pathFolder}\MaxPointsCount.txt";
+
+        public static void ExportSavedData()
+        {
+            StreamWriter print = new StreamWriter(pathTxtFileSavedData, false);
+            print.Write(FoodGeneration.GamePoints);
+            print.WriteLine();
             for (int i = 0; i < Snake.snake.Count; i++)
             {
                 print.Write(Snake.snake[i].x + " ");
-                print.Write(Snake.snake[i].y + " ");
+                print.Write(Snake.snake[i].y);
                 print.WriteLine();
-
             }
             print.Close();
+            HeaderText.PrintLastMessage("Файл збережено!");
+        }
 
-            HeaderText.PrintMessage("Файл збережено! Для продовження натисніть клавішу \"P\"", 5);
-
-            //File.AppendAllText(pathTxtFile, $"{text}\n");
-            //File.WriteAllText(pathTxtFile, $"{text}\n");
+        public static void ExportMaxPointsCount()
+        {
+            File.WriteAllText(pathTxtFileMaxPointsCount, $"{FoodGeneration.GamePoints}");
         }
     }
 }

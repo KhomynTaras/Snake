@@ -13,27 +13,51 @@ namespace Snake
             Console.OutputEncoding = Encoding.UTF8;
 
             PrintMessage("SNAKE", 0);
-            PrintMessage("Оберіть рівень складності від 1 до 3: ",  1);
+            PrintPointsCounter();
+            string message = "Оберіть рівень складності від 1 до 3: ";
+            PrintMessage(message,  2);
             while (true)
             {
-                if (!int.TryParse(Console.ReadLine(), out Program.difficultyLevel) || Program.difficultyLevel < 1 || Program.difficultyLevel > 3)
-                    Console.WriteLine("Введені дані мали невірний формат, спробуйте ще раз");
+                ClearPrintMessage(2);
+                PrintMessage(message, 2);
+
+                if (!double.TryParse(Console.ReadLine(), out Program.difficultyLevel) || Program.difficultyLevel < 1 || Program.difficultyLevel > 3)
+                    PrintLastMessage("Введені дані мали невірний формат, спробуйте ще раз");
                 else
+                {
+                    ClearPrintMessage(7);
                     break;
+                }
+             
             }
-            PrintMessage("Для початку гри натисніть клавішу \"P\"", 2);
-            PrintMessage("Для паузи натисніть клавішу \"Space\"", 3);
-            PrintMessage("Для збереження результатів натисніть клавішу \"S\"",  4);
-            PrintMessage("Для завантаження результатів натисніть клавішу \"U\"", 5);
+            PrintMessage("Для початку гри натисніть клавішу \"P\"", 3);
+            PrintMessage("Для паузи натисніть клавішу \"Space\"", 4);
+            PrintMessage("Для збереження результатів натисніть клавішу \"S\"",  5);
+            PrintMessage("Для завантаження результатів натисніть клавішу \"I\"", 6);
 
             Console.CursorVisible = false;
-
         }
 
         public static void PrintMessage(string message,int y)
         {
             Console.SetCursorPosition(WindowSize.WindowWidth / 2 - message.Length / 2, y);
             Console.Write(message);
+        }
+        public static void ClearPrintMessage(int y)
+        {
+            string message = "                                                                                 ";
+            Console.SetCursorPosition(WindowSize.WindowWidth / 2 - message.Length / 2, y);
+            Console.Write(message);
+        }
+
+        public static void PrintPointsCounter()
+        {
+            PrintMessage($"GamePoints: {FoodGeneration.GamePoints}, MaxGamePoints: {FoodGeneration.MaxGamePoints}", 1);
+        }
+        public static void PrintLastMessage(string message)
+        {
+            ClearPrintMessage(7);
+            PrintMessage(message, 7);
         }
     }
 }

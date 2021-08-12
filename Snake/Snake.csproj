@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionWithPlayer.cs" />
     <Compile Include="ExportData.cs" />
     <Compile Include="FoodGeneration.cs" />
     <Compile Include="HeaderText.cs" />

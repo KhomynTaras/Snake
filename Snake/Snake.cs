@@ -21,6 +21,27 @@ namespace Snake
         private Point tail;
         private Point head;
         bool rotate = true;
+        public Snake(int [,] arr)
+        {
+            int iRow = arr.GetUpperBound(0);
+
+            if (arr[iRow, 0] > arr[iRow - 1, 0])
+                direction = Direction.RIGHT;
+            else if (arr[iRow, 0] < arr[iRow - 1, 0])
+                direction = Direction.LEFT;
+            else if (arr[iRow, 1] > arr[iRow - 1, 1])
+                direction = Direction.UP;
+            else
+                direction = Direction.DOWN;
+
+            snake = new List<Point>();
+            for (int i = 0; i <= arr.GetUpperBound(0); i++)
+            {
+                Point p = (arr[i,0], arr[i, 1], "*");
+                snake.Add(p);
+                p.Draw();
+            }
+        }
         public Snake(int x, int y, int length)
         {
             direction = Direction.RIGHT;
@@ -92,7 +113,7 @@ namespace Snake
             for (int i = snake.Count - 2; i > 0; i--)
             {
                 if (snake[i] == p)
-                {
+                {               
                     return true;
                 }
             }
@@ -106,6 +127,7 @@ namespace Snake
             {
                 snake.Add(head);
                 head.Draw();
+                FoodGeneration.PointsCounter();
                 return true;
             }
             return false;
