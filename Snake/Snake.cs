@@ -127,7 +127,7 @@ namespace Snake
             {
                 snake.Add(head);
                 head.Draw();
-                FoodGeneration.PointsCounter();
+                PointsCounter.Counter();
                 return true;
             }
             return false;

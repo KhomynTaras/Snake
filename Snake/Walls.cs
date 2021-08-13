@@ -8,14 +8,14 @@ namespace Snake
 {
     class Walls
     {
-        public static readonly int initialY = 9;
         private string ch;
+
         private List<Point> wall = new List<Point>();
 
         public Walls(int x, int y, string ch)
         {
             this.ch = ch;
-            DrawHorizontal(x, initialY);
+            DrawHorizontal(x, InitialParametrs.initialY);
             DrawHorizontal(x, y);
             DrawVertical(0, y);
             DrawVertical(x - 1, y);
@@ -32,7 +32,7 @@ namespace Snake
         }
         private void DrawVertical(int x, int y)
         {
-            for (int i = initialY + 1; i < y; i++)
+            for (int i = InitialParametrs.initialY + 1; i < y; i++)
             {
                 Point p = (x, i, ch);
                 p.Draw();

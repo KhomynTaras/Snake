@@ -11,8 +11,6 @@ namespace Snake
         string ch;
         int x, y;
         public Point food { get; private set; }
-        public static int GamePoints;
-        public static int MaxGamePoints;
 
         Random random = new Random();
 
@@ -32,7 +30,7 @@ namespace Snake
             while(!checkValue)
             {
                 cX = random.Next(2, x - 2);
-                cY = random.Next(Walls.initialY + 2, y - 2);
+                cY = random.Next(InitialParametrs.initialY + 2, y - 2);
 
                 for (int i = 0; i < Snake.snake.Count; i++)
                 {
@@ -45,17 +43,6 @@ namespace Snake
 
             food = (cX, cY, ch);
             food.Draw();
-        }
-
-        public static void PointsCounter()
-        {
-            GamePoints++;
-            if(MaxGamePoints < GamePoints)
-            {
-                MaxGamePoints = GamePoints;
-                ExportData.ExportMaxPointsCount();
-            }
-            HeaderText.PrintPointsCounter();
         }
     }
 }

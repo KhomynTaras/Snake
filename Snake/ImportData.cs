@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class ImportData
+    class ImportData : Path
     {
-        public static int[,] Data()
+        public static int[,] GetDataFromTxt()
         {
-            string pathFile = ExportData.pathTxtFileSavedData;
-            if (File.Exists(pathFile))
+            if (File.Exists(pathTxtFileSavedData))
             {
-                string[] lines = File.ReadAllLines(pathFile);
+                string[] lines = File.ReadAllLines(pathTxtFileSavedData);
 
                 if (lines.Length != 0)
                 {
-                    FoodGeneration.GamePoints = Convert.ToInt32(lines[0]);
+                    PointsCounter.GamePoints = Convert.ToInt32(lines[0]);
                     HeaderText.PrintPointsCounter();
 
                     int[,] num = new int[lines.Length - 1, lines[1].Split(' ').Length];
@@ -38,8 +37,8 @@ namespace Snake
 
         public static void GetMaxPoints()
         {
-            if (File.Exists(ExportData.pathTxtFileMaxPointsCount))
-                FoodGeneration.MaxGamePoints = Convert.ToInt32(File.ReadAllText(ExportData.pathTxtFileMaxPointsCount));
+            if (File.Exists(pathTxtFileMaxPointsCount))
+                PointsCounter.MaxGamePoints = Convert.ToInt32(File.ReadAllText(pathTxtFileMaxPointsCount));
         }
     }
 }

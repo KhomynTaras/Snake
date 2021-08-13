@@ -13,33 +13,47 @@ namespace Snake
         {
             this.snake = snake;
         }
-        public void Connect()
+        public void Connect(ref bool chekPlay, bool gameOver)
         {
             if (Console.KeyAvailable)
             {
-                var key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.UpArrow)
-                    snake.Rotation("U");
-                if (key.Key == ConsoleKey.DownArrow)
-                    snake.Rotation("D");
-                if (key.Key == ConsoleKey.LeftArrow)
-                    snake.Rotation("L");
-                if (key.Key == ConsoleKey.RightArrow)
-                    snake.Rotation("R");
-                if (key.Key == ConsoleKey.P)
+                if(gameOver == false)
                 {
-                    Program.chekPlay = true;
-                    HeaderText.ClearPrintMessage(7);
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.UpArrow)
+                        snake.Rotation("U");
+                    if (key.Key == ConsoleKey.DownArrow)
+                        snake.Rotation("D");
+                    if (key.Key == ConsoleKey.LeftArrow)
+                        snake.Rotation("L");
+                    if (key.Key == ConsoleKey.RightArrow)
+                        snake.Rotation("R");
+                    if (key.Key == ConsoleKey.P)
+                    {
+                        chekPlay = true;
+                        HeaderText.ClearPrintMessage(7);
+                    }
+                    if (key.Key == ConsoleKey.Spacebar)
+                    {
+                        chekPlay = false;
+                        HeaderText.PrintLastMessage("Ви ввійшли в режим паузи!");
+                    }
+                    if (key.Key == ConsoleKey.S)
+                    {
+                        chekPlay = false;
+                        ExportData.ExportSavedData();
+                    }
                 }
-                if (key.Key == ConsoleKey.Spacebar)
+                else
                 {
-                    Program.chekPlay = false;
-                    HeaderText.PrintLastMessage("Ви ввійшли в режим паузи!");
-                }
-                if (key.Key == ConsoleKey.S)
-                {
-                    ExportData.ExportSavedData();
-                    Program.chekPlay = false;
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.R)
+                    {
+                        ClearWindow.Clear();
+                        PointsCounter.Reset();
+  
+                        Program.Main();
+                    }
                 }
             }
         }

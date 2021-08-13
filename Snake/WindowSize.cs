@@ -9,7 +9,7 @@ namespace Snake
     class WindowSize
     {
         public const int WindowWidth = 90;
-        public const int WindowHeight = 30;
+        public const int WindowHeight = 36;
         public static void Value()
         {
             Task.Factory.StartNew(() =>
