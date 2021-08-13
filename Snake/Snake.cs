@@ -29,7 +29,7 @@ namespace Snake
                 direction = Direction.RIGHT;
             else if (arr[iRow, 0] < arr[iRow - 1, 0])
                 direction = Direction.LEFT;
-            else if (arr[iRow, 1] > arr[iRow - 1, 1])
+            else if (arr[iRow, 1] < arr[iRow - 1, 1])
                 direction = Direction.UP;
             else
                 direction = Direction.DOWN;
