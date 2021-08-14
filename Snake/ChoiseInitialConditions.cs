@@ -17,7 +17,7 @@ namespace Snake
                 {
                     chekPlay = true;
                     HeaderText.ClearPrintMessage(7);
-                    snake = new Snake(WindowSize.WindowWidth / 2, (WindowSize.WindowHeight + InitialParametrs.initialY) / 2, InitialParametrs.initialLenght);
+                    snake = new Snake(CheckWindowSize.WindowWidth / 2, (CheckWindowSize.WindowHeight + InitialParametrs.initialY) / 2, InitialParametrs.initialLenght);
                     break;
                 }
                 if (key.Key == ConsoleKey.I)
@@ -30,7 +30,7 @@ namespace Snake
                     }
                     else
                     {
-                        snake = new Snake(WindowSize.WindowWidth / 2, (WindowSize.WindowHeight + InitialParametrs.initialY) / 2, InitialParametrs.initialLenght);
+                        snake = new Snake(CheckWindowSize.WindowWidth / 2, (CheckWindowSize.WindowHeight + InitialParametrs.initialY) / 2, InitialParametrs.initialLenght);
                         HeaderText.PrintLastMessage("Відсутні збережені дані! Завантажено автоматичні налаштування");
                     }
                     break;

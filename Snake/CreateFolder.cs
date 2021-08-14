@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class CreateFolder : IPathFolder
+    class CreateFolder 
     {
-        public string pathFolder { get; set; } = $@"{Directory.GetCurrentDirectory()}\SavedData";
+        public static string pathFolder { get; set; } = $@"{Directory.GetCurrentDirectory()}\SavedData";
 
-        public CreateFolder()
+        public static void Create()
         {
             DirectoryInfo dirInfo = new DirectoryInfo(pathFolder);
             if (!dirInfo.Exists)

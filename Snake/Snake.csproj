@@ -54,7 +54,6 @@
     <Compile Include="HeaderText.cs" />
     <Compile Include="ImportData.cs" />
     <Compile Include="InitialParametrs.cs" />
-    <Compile Include="IPathFolder.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="PointsCounter.cs" />
@@ -62,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Snake.cs" />
     <Compile Include="Walls.cs" />
-    <Compile Include="WindowSize.cs" />
+    <Compile Include="CheckWindowSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

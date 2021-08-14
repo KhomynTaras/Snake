@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class WindowSize
+    class CheckWindowSize
     {
         public const int WindowWidth = 90;
         public const int WindowHeight = 36;

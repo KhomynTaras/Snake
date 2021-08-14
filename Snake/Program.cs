@@ -12,8 +12,8 @@ namespace Snake
     {
         public static void Main()
         {
-            WindowSize.Value();
-            CreateFolder createFolder = new CreateFolder();
+            CreateFolder.Create();
+            CheckWindowSize.Value();
 
             Game game = new Game();
             game.Play();

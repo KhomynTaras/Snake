@@ -11,9 +11,9 @@ namespace Snake
         public static void Clear()
         {
 
-            for(int i = 0; i <= WindowSize.WindowWidth; i++)
+            for(int i = 0; i <= CheckWindowSize.WindowWidth; i++)
             {
-                for (int j = 0; j <= WindowSize.WindowHeight; j++)
+                for (int j = 0; j <= CheckWindowSize.WindowHeight; j++)
                 {
                     Console.SetCursorPosition(i, j);
                     Console.Write("  ");

@@ -17,17 +17,12 @@ namespace Snake
         {
             if (Console.KeyAvailable)
             {
-                if(gameOver == false)
+                if(!gameOver)
                 {
                     var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.UpArrow)
-                        snake.Rotation("U");
-                    if (key.Key == ConsoleKey.DownArrow)
-                        snake.Rotation("D");
-                    if (key.Key == ConsoleKey.LeftArrow)
-                        snake.Rotation("L");
-                    if (key.Key == ConsoleKey.RightArrow)
-                        snake.Rotation("R");
+                    snake.Rotation(key.Key);
+
+
                     if (key.Key == ConsoleKey.P)
                     {
                         chekPlay = true;

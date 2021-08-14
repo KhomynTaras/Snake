@@ -21,13 +21,13 @@ namespace Snake
         {
             ImportData.GetMaxPoints();
 
-            walls = new Walls(WindowSize.WindowWidth, WindowSize.WindowHeight - 1, "#");
+            walls = new Walls(CheckWindowSize.WindowWidth, CheckWindowSize.WindowHeight - 1, "#");
 
             HeaderText.Value();
 
             ChoiseInitialConditions.Choise(ref chekPlay, ref snake);
 
-            foodGeneration = new FoodGeneration(WindowSize.WindowWidth, WindowSize.WindowHeight, "@");
+            foodGeneration = new FoodGeneration(CheckWindowSize.WindowWidth, CheckWindowSize.WindowHeight, "@");
             foodGeneration.CreateFood();
 
             time = new Timer(Loop, null, 0, 200 / InitialParametrs.difficultyLevel);

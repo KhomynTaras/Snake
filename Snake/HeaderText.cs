@@ -29,13 +29,13 @@ namespace Snake
 
         public static void PrintMessage(string message,int y)
         {
-            Console.SetCursorPosition(WindowSize.WindowWidth / 2 - message.Length / 2, y);
+            Console.SetCursorPosition(CheckWindowSize.WindowWidth / 2 - message.Length / 2, y);
             Console.Write(message);
         }
         public static void ClearPrintMessage(int y)
         {
             string message = "                                                                                 ";
-            Console.SetCursorPosition(WindowSize.WindowWidth / 2 - message.Length / 2, y);
+            Console.SetCursorPosition(CheckWindowSize.WindowWidth / 2 - message.Length / 2, y);
             Console.Write(message);
         }
 

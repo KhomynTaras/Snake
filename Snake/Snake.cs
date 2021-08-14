@@ -84,7 +84,7 @@ namespace Snake
             }
             return p;
         }
-        public void Rotation(string m)
+        public void Rotation(ConsoleKey key)
         {
             if (rotate)
             {
@@ -92,16 +92,16 @@ namespace Snake
                 {
                     case Direction.LEFT:
                     case Direction.RIGHT:
-                        if (m == "D")
+                        if (key == ConsoleKey.DownArrow)
                             direction = Direction.DOWN;
-                        else if (m == "U")
+                        else if (key == ConsoleKey.UpArrow)
                             direction = Direction.UP;
                         break;
                     case Direction.UP:
                     case Direction.DOWN:
-                        if (m == "L")
+                        if (key == ConsoleKey.LeftArrow)
                             direction = Direction.LEFT;
-                        else if (m == "R")
+                        else if (key == ConsoleKey.RightArrow)
                             direction = Direction.RIGHT;
                         break;
                 }
